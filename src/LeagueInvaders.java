@@ -25,7 +25,7 @@ void setup() {
 	window.setVisible(true);
 	window.setSize(WIDTH, HEIGHT);
 	window.add(panal);
-	
+	window.addKeyListener(panal);
 	
 	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
