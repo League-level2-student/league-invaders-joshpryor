@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 	Timer frameDraw ;
 	
 	int enimisKilld = 0;
-	
+	RocketShip ship = new RocketShip(250, 750, 50, 50);
 	int currentState = MENU;
 	
     void updateMenuState(){}void updateGameState(){}void updateEndState(){}
@@ -60,6 +60,12 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 	 void drawGameState(Graphics g) { 
 		 g.setColor(Color.BLACK);
 		 g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		 
+		 ship.draw(g);
+		 
+		 
+		 
+		 
 	 }
 	 
 	 void drawEndState(Graphics g)  { 
