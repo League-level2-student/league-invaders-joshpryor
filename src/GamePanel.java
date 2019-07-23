@@ -19,17 +19,27 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 
 	Timer frameDraw ;
 	
+	
+	
+	
+	
+	
+	
 	int enimisKilld = 0;
-	RocketShip ship = new RocketShip(250, 750, 50, 50);
+	RocketShip ship = new RocketShip(250, 700, 50, 50);
 	int currentState = MENU;
 	
-    void updateMenuState(){}void updateGameState(){}void updateEndState(){}
+    void updateMenuState(){}
+    
+    void updateGameState(){}
+    
+    void updateEndState(){}
 
     GamePanel(){
     	tileFont = new Font("Arial", Font.PLAIN, 48);
     	ohHi = new Font ("Arial", Font.PLAIN, 10);
     	purpur = new Font("Arial", Font.PLAIN, 28);
-    	frameDraw = new Timer(1000/60, this);
+    	//frameDraw = new Timer(1000/60, this);
     	frameDraw = new Timer(1000/60,this);
 	    frameDraw.start();
     }
@@ -39,7 +49,9 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 	@Override
 	public void paintComponent(Graphics g){
 		//update state
-		if(currentState == MENU){drawMenuState(g);}else if(currentState == GAME){drawGameState(g);}else if(currentState == END){drawEndState(g);}
+		if(currentState == MENU){drawMenuState(g);}
+		else if(currentState == GAME){drawGameState(g);}
+		else if(currentState == END){drawEndState(g);}
 		//update state
 	}
 	
@@ -60,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 	 void drawGameState(Graphics g) { 
 		 g.setColor(Color.BLACK);
 		 g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-		 
+	
 		 ship.draw(g);
 		 
 		 
@@ -89,6 +101,8 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 	    //update state
 	    System.out.println();
 	    repaint();
+	    
+	    
 	}
 
 	@Override
@@ -109,15 +123,28 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener{
 		}   
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
+		    if (ship.y >= 0) {
+		    	ship.y = ship.y - ship.speed;
+		    }
 		}
 		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 		    System.out.println("LEFT");
+		    if (ship.x >= 0) {
+		    	ship.x = ship.x - ship.speed;
+		    }
+		    
 		}
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		    System.out.println("RIGHT");
+		    if (ship.x <= 450) {
+		    ship.x = ship.x + ship.speed;
+		    }
 		}
 		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 		    System.out.println("DOWN");
+		    if (ship.y <= 750) {
+		    ship.y = ship.y + ship.speed;
+		    }
 		}
 		
 		

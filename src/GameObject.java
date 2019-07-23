@@ -9,15 +9,13 @@ public class GameObject {
 	 boolean isActive = true;
 	 
 	 
-	 GameObject(int x, int y, int width, int height){
-			this.x = x = 0;
-		this.y = 	y = 0;
-			this.width = width = 0;
-			this.height = height = 0;
-			 
-		 
-		 
-	 }
+	GameObject(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+
+	}
 	
 	void update() {
 
