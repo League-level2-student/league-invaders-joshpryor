@@ -1,13 +1,54 @@
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ObjectManager {
 	RocketShip ship;
-	Projectile chip;
+	//Projectile  chip;
+	ArrayList<Projectile> projectiles= new ArrayList<Projectile>();
+	
+	ArrayList<Alian> Alians= new ArrayList<Alian>();
+	
+	Random ran = new Random();
 	
 	
-	ObjectManager(){
-		ship = new RocketShip(250, 500, 50, 50);
-		chip = new Projectile(250, 200,50,50);
+	
+	
+	
+	
+	
+	
+	
+	
+	ObjectManager(RocketShip rick){
+		ship = rick;
+	
+		
+		
+	}
+	void addProjectile(Projectile  chip){
+		projectiles.add(chip)		;
+	}
+	void addAlian() {
+		Alians.add(new Alian(ran.nextInt(LeagueInvaders.WIDTH),0,50,50));
 		
 	}
 	
+	void update() {
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Projectile
 }
