@@ -30,6 +30,11 @@ public class RocketShip extends GameObject {
 	        needImage = false;
 	    }
 	}
+	    Projectile getProjectile() {
+	        return new Projectile(x+width/2, y, 10, 10);
+	
+	    
+	}
 	public void up() {
 		x += speed;
 	}
