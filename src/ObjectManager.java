@@ -30,15 +30,14 @@ public class ObjectManager implements ActionListener {
 	void update() {
 		for (int i = 0; i < alians.size(); i++) {
 			Alian allen = alians.get(i);
-allen.update();
+			allen.update();
 			if (allen.y >= LeagueInvaders.HEIGHT) {
 				allen.isActive = false;
 
 			}
-				
+
 		}
-		
-		
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile proSkillz = projectiles.get(i);
 			proSkillz.update();
@@ -47,16 +46,18 @@ allen.update();
 			}
 
 		}
+		checkCollision();
+		purgeObjects();
 	}
 
 	void draw(Graphics g) {
 		ship.draw(g);
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile proSkillz = projectiles.get(i);
-			proSkillz     .draw(g);
+			proSkillz.draw(g);
 			if (proSkillz.y <= 0) {
 				proSkillz.isActive = false;
-	
+
 			}
 
 		}
@@ -65,19 +66,40 @@ allen.update();
 			allen.draw(g);
 			if (allen.y >= LeagueInvaders.HEIGHT) {
 				allen.isActive = false;
-				
+
 			}
 
 		}
 	}
-	
+
+	void checkCollision() {
+		for (int i = 0; i < alians.size(); i++) {
+			Alian allen = alians.get(i);
+
+			if (ship.collisionBox.intersects(allen.collisionBox)) {
+				ship.isActive = (false);
+					break;
+			}
+			for (int o = 0; o < projectiles.size(); o++) {
+				Projectile proSkillz = projectiles.get(o);
+
+				if (proSkillz.collisionBox.intersects(allen.collisionBox)) {
+					allen.isActive = (false);
+					proSkillz.isActive=(false);
+				}
+
+			}
+		}
+
+	}
+
 	void purgeObjects() {
 		for (int i = 0; i < alians.size(); i++) {
 			Alian allen = alians.get(i);
 
 			if (allen.y >= LeagueInvaders.HEIGHT) {
 				allen.isActive = false;
-				
+
 			}
 			if (allen.isActive == false) {
 				alians.remove(i);
@@ -92,14 +114,14 @@ allen.update();
 			if (proSkillz.isActive == false) {
 				projectiles.remove(i);
 			}
-			
-			
+
+		}
+		// Projectile
 	}
-	// Projectile
-}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		addAlian();
-	}}
+	}
+}

@@ -16,7 +16,7 @@ public class RocketShip extends GameObject {
 		    loadImage ("rocket.png");
 		}
 		// TODO Auto-generated constructor stub
-		speed = 60;
+		speed = 30;
 
 	}
 	void loadImage(String imageFile) {
@@ -52,6 +52,7 @@ public class RocketShip extends GameObject {
 	}
 
 	void draw(Graphics g) {
+		super.draw(g);
 		g.setColor(Color.BLUE);
 		g.fillRect(x, y, width, height);
 		if (gotImage) {

@@ -14,12 +14,14 @@ public class Alian extends GameObject {
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 		if (needImage) {
-		    loadImage ("alian.png");
+		    loadImage ("alien.png");
 		}
 
 	}
 
-	void update() {
+	void update() { 
+		super.update();
+
 		y += speed;
 
 	}
@@ -35,7 +37,7 @@ public class Alian extends GameObject {
 	    }
 	}
 	void draw(Graphics g) {
-		
+		super.draw(g);
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {

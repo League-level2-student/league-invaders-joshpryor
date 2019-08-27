@@ -20,12 +20,14 @@ public class Projectile extends GameObject {
 	}
 
 	void update() {
+		  super.update();
+
 		y -= speed;
 
 	}
 
 	void draw(Graphics g) {
-	
+		super.draw(g);
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {
