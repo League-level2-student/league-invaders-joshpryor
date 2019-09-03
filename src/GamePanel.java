@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
-	int enimisKilld = 0;
+	
 	RocketShip ship = new RocketShip(250, 700, 50, 50);
 	int currentState = MENU;
 	ObjectManager Manager = new ObjectManager(ship);
@@ -36,9 +36,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		Manager.update();
-		
+		if (!ship.isActive) {
+			currentState = END;
+		}
 	}
-
+		
 	void updateEndState() {
 	}
 
@@ -105,7 +107,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("LEAGUE INVADERS", 20, 125);
 		g.setFont(purpur);
 		g.drawString("press ENTER to start", 100, 300);
-		g.drawString("press SPACE for instructions", 50, 500);
 		g.setFont(ohHi);
 		g.drawString(" oh hi =) ", 100, 700);
 	}
@@ -130,7 +131,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(tileFont);
 		g.drawString("Game Over", 100, 100);
 		g.setFont(purpur);
-		g.drawString("you killed " + enimisKilld + " enemies", 120, 342);
+		g.drawString("you killed " + Manager.getScore() + " enemies", 120, 342);
 		g.drawString("press ENTER to restart", 100, 540);
 
 	}
@@ -148,7 +149,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			updateEndState();
 		}
 		// update state
-		System.out.println();
+	
 		repaint();
 
 	}
@@ -165,6 +166,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
+				
+				 ship = new RocketShip(250, 700, 50, 50);
+				 Manager = new ObjectManager(ship);
+				
 				currentState = MENU;
 			}
 			
@@ -189,27 +194,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			System.out.println("UP");
-			if (ship.y >= 0) {
-				ship.y = ship.y - ship.speed;
+			if (Manager.ship.y >= 0) {
+				Manager.ship.y = Manager.ship.y - Manager.ship.speed;
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			System.out.println("LEFT");
-			if (ship.x >= 0) {
-				ship.x = ship.x - ship.speed;
+			if (Manager.ship.x >= 0) {
+				Manager.ship.x = Manager.ship.x - Manager.ship.speed;
 			}
 
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			System.out.println("RIGHT");
-			if (ship.x <= 450) {
-				ship.x = ship.x + ship.speed;
+			if (Manager.ship.x <= 450) {
+				Manager.ship.x = Manager.ship.x + Manager.ship.speed;
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			System.out.println("DOWN");
-			if (ship.y <= 750) {
-				ship.y = ship.y + ship.speed;
+			if (Manager.ship.y <= 750) {
+				Manager.ship.y = Manager.ship.y + Manager.ship.speed;
 			}
 		}
 

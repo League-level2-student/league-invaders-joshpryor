@@ -11,12 +11,20 @@ public class ObjectManager implements ActionListener {
 
 	ArrayList<Alian> alians = new ArrayList<Alian>();
 
+	int score = 0;
+	
 	Random ran = new Random();
 
 	ObjectManager(RocketShip rick) {
 		ship = rick;
 
 	}
+	
+	 int getScore() {
+		return score;
+	}
+	
+	
 
 	void addProjectile(Projectile chip) {
 		projectiles.add(chip);
@@ -28,6 +36,7 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void update() {
+		ship.update();
 		for (int i = 0; i < alians.size(); i++) {
 			Alian allen = alians.get(i);
 			allen.update();
@@ -47,7 +56,11 @@ public class ObjectManager implements ActionListener {
 
 		}
 		checkCollision();
-		purgeObjects();
+		if (ship.isActive) {
+			purgeObjects();
+		}
+		
+		
 	}
 
 	void draw(Graphics g) {
@@ -73,19 +86,22 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void checkCollision() {
-		for (int i = 0; i < alians.size(); i++) {
-			Alian allen = alians.get(i);
+		for (Alian allen : alians) {
+			
 
 			if (ship.collisionBox.intersects(allen.collisionBox)) {
-				ship.isActive = (false);
-					break;
+				ship.isActive = false;
+				System.out.println("ship has died =(");
+				break;
+					
 			}
-			for (int o = 0; o < projectiles.size(); o++) {
-				Projectile proSkillz = projectiles.get(o);
+			for (Projectile proSkillz : projectiles) {
+			
 
 				if (proSkillz.collisionBox.intersects(allen.collisionBox)) {
 					allen.isActive = (false);
 					proSkillz.isActive=(false);
+					score += 1;
 				}
 
 			}
